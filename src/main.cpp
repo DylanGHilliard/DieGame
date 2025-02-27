@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 
     Room room;
     room.Load("assets/level_1.map");
-
+    printf("Hello\n");
     while(true)
     {
         room.Update();
