@@ -102,7 +102,7 @@ void Room::Load(std::string _path)
 
             if (m_map[y][x] == 'M')
             {
-                Entity* monster = new Monster();
+                Entity* monster = new Bear();
                 monster->Init(Vector2D(x, y));
                 m_monsters.push_back(monster);
 

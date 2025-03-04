@@ -11,3 +11,9 @@ void Monster::Update()
 {
  
 }
+
+void Bear::Start()
+{
+    m_character = 'B';
+    health = 10;
+}

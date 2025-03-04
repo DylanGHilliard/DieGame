@@ -12,8 +12,9 @@ private:
 };
 
 
-class Bear : Monster{
+class Bear : public Monster{
 public:
-
+    void Start();
+    //void Update();
 private:
 };
