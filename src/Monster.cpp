@@ -9,7 +9,7 @@ void Monster::Start()
 
 void Monster::Update()
 {
- 
+
 }
 
 void Bear::Start()
