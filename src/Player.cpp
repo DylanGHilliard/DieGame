@@ -2,10 +2,12 @@
 #include "fogpi/fogpi.hpp"
 
 #include "Room.hpp"
+#include <time.h>
 
 void Player::Start()
 {
     m_character = 'P';
+    health = m_stats.constitution;
 }
 
 void Player::Update()
@@ -61,11 +63,15 @@ void Player::Update()
         room->SetLocation(tryPos, 'D');
         return;
     }
-
+   
     // open door
     if (room->GetLocation(tryPos) == 'D')
     {
         room->OpenDoor(tryPos);
+        if (int i = rand() % 2;  i == 0)
+        {
+            health += 5;
+        }
     }
 
     if (room->GetLocation(tryPos) == ' ') 

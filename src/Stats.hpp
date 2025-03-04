@@ -2,10 +2,10 @@
 
 struct Stats
 {
-    int strength = 0;
-    int dexterity = 0;
-    int constitution = 0;
-    int intelligence = 0;
-    int wisdom = 0;
-    int charisma = 0;
+    int strength = 1;
+    int dexterity = 1;
+    int constitution = 1;
+    int intelligence = 1;
+    int wisdom = 1;
+    int charisma = 1;
 };

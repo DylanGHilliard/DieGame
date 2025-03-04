@@ -1,5 +1,5 @@
 #include "Room.hpp"
-
+#include "Monster.hpp"
 #include "Player.hpp"
 
 #include <fstream>
@@ -102,10 +102,12 @@ void Room::Load(std::string _path)
 
             if (m_map[y][x] == 'M')
             {
-
+                Entity* monster = new Monster();
+                monster->Init(Vector2D(x, y));
+                m_monsters.push_back(monster);
 
                 // clear
-                m_map[y][x] = ' ';
+               // m_map[y][x] = ' ';
             }
         }
     }
@@ -188,7 +190,12 @@ void Room::ClearLocation(Vector2D _pos)
 }
 
 void Room::OpenDoor(Vector2D _pos)
-{
+{   
+    if(m_monsters.size() > 0)
+    {
+        printf("Monsters are still alive\n");
+        return;
+    }
     for(int i = 0; i < m_doors.size(); i++)
     {
         if (m_doors[i].pos == _pos)

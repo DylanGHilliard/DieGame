@@ -13,6 +13,7 @@ public:
 
     virtual void Start() {}
     virtual void Update() {}
+ 
 
     char Draw() { return m_character; }
     Vector2D GetPosition() { return m_position; }

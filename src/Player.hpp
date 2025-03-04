@@ -5,7 +5,7 @@
 class Player : public Entity
 {
 public:
-    int health = 0;
+    int health = 10;
     void Start();
     void Update();
 private:
