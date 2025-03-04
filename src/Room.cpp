@@ -100,11 +100,23 @@ void Room::Load(std::string _path)
                 }
             }
 
-            if (m_map[y][x] == 'M')
+            if (m_map[y][x] == 'B')
             {
                 Entity* monster = new Bear();
                 monster->Init(Vector2D(x, y));
                 m_monsters.push_back(monster);
+                monster->Start();
+
+                // clear
+               // m_map[y][x] = ' ';
+            }
+
+            if (m_map[y][x] == 'W')
+            {
+                Entity* monster = new Wolf();
+                monster->Init(Vector2D(x, y));
+                m_monsters.push_back(monster);
+                monster->Start();
 
                 // clear
                // m_map[y][x] = ' ';

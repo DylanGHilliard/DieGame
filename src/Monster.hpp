@@ -18,3 +18,10 @@ public:
     //void Update();
 private:
 };
+
+class Wolf : public Monster{
+    public:
+        void Start();
+        //void Update();
+    private:
+    };

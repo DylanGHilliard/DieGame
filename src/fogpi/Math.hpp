@@ -60,3 +60,5 @@ inline bool operator ==(const Vector2D& _a, const Vector2D& _b) {
 
 extern void Print(const Vector2D &_v);
 extern float Distance2D(const Vector2D &_v1, const Vector2D &_v2);
+extern float Magnitude(const Vector2D &_v);
+extern Vector2D Normalize(const Vector2D &_v);

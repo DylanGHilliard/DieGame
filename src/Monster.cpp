@@ -17,3 +17,9 @@ void Bear::Start()
     m_character = 'B';
     health = 10;
 }
+
+void Wolf::Start()
+{
+    m_character = 'W';
+    health = 10;
+}
