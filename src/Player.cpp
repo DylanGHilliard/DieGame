@@ -44,6 +44,13 @@ void Player::Update()
 
     Vector2D tryPos = m_position + direction;
 
+       // Check for monster encounter
+       if (room->GetLocation(tryPos) == 'B' || room->GetLocation(tryPos) == 'W')
+       {
+            room->Fight(tryPos);
+            return;
+       }
+
     // check for a key
     if (room->GetLocation(tryPos) == 'K')
     {

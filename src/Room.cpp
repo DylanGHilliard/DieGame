@@ -216,26 +216,25 @@ void Room::OpenDoor(Vector2D _pos)
         }
     }
 }
-/*
-void Room::Fight(Player* _player, Entity* _monster)
+
+void Room::Fight(Vector2D tryPos)
 {
-        *(Monster*) _monster = *(Monster*) _monster;
-    while (_player->health > 0 && _monster->health > 0)
+    Player& player = *(Player*)m_player;
+    Monster* monster;
+    for (Entity* _monster : m_monsters)
     {
-        float playerDamage = _player->GetStats().strength - _monster->GetStats().constitution * 0.2f;
-        float monsterDamage = _monster->GetStats().strength - _player->GetStats().constitution * 0.2f;
+        if (_monster->GetPosition() == tryPos)
+        {
+            //monster = *(Monster*)_monster;
+            return;
+        }
+    }
 
-        if (playerDamage < 0)
-            playerDamage = 0;
-
-        if (monsterDamage < 0)
-            monsterDamage = 0;
-
-        _player->health -= monsterDamage;
-        _monster->health -= playerDamage;
-
+    while (player.health > 0 && monster->health > 0)
+    {
+        return;
     }
 
 
 }
-    *\
+    

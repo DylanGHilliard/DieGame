@@ -12,7 +12,7 @@ public:
     void Load(std::string _path);
     void Draw();
     void Update();
-    void Fight(Player* _player, Entity* _monster);
+    void Fight(Vector2D tryPos);
 
     bool StillPlaying() { return true; }
 
