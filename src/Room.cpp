@@ -246,12 +246,13 @@ void Room::Fight(Vector2D tryPos)
     int monsterIndex = 0;
     for (Entity* _monster : m_monsters)
     {
-        monsterIndex++;
+        
         if (_monster->GetPosition() == tryPos)
         {
             monster = (Monster*)_monster;
             break;
         }
+        monsterIndex++;
     }
 
     if (!monster)
@@ -315,9 +316,8 @@ void Room::Fight(Vector2D tryPos)
         {
            printf("Monster is dead, good job\n");
            ClearLocation(tryPos);
-           Entity* _monster = m_monsters[monsterIndex] ;
-           delete _monster;
-           //_monster = nullptr;
+           delete m_monsters[monsterIndex];
+           m_monsters.erase(m_monsters.begin() + monsterIndex);
 
            return;
         }
