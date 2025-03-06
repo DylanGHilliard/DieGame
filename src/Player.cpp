@@ -7,7 +7,7 @@
 void Player::Start()
 {
     m_character = 'P';
-    health = m_stats.constitution;
+    health = m_stats.constitution *10;
 }
 
 void Player::Update()
@@ -61,6 +61,7 @@ void Player::Update()
 
             m_keyCount--;
             room->ClearLocation(tryPos);
+            PrintStats();
         }
         else
         {

@@ -257,6 +257,8 @@ void Room::Fight(Vector2D tryPos)
     printf("Good luck......mortal\n");
     while (player.health > 0 && monster->health > 0)
     {
+
+
         // player attack monster
         int playerDamage = player.GetStats().strength;
         monster->health -= playerDamage;

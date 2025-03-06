@@ -16,10 +16,12 @@ void Monster::Update()
 
 void Bear::Start()
 {
+    health = 10;
     m_character = 'B';
 }
 
 void Wolf::Start()
 {
+    health = 10;
     m_character = 'W';
 }
