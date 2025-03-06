@@ -123,6 +123,24 @@ void Room::Load(std::string _path)
             }
         }
     }
+    if (rand() % 100 < 30)  
+    {
+        bool chestPlaced = false;
+        while (!chestPlaced)
+        {
+            // Pick random position
+            int randY = (rand() % m_map.size()-2)+1;
+            int randX = (rand() % m_map[randY].size()-2)+1;
+            
+            // Only place chest on empty space
+            if (m_map[randY][randX] == ' ')
+            {
+                m_map[randY][randX] = 'C';
+                chestPlaced = true;
+            }
+            
+        }
+    }
 }
 
 void Room::Update()
