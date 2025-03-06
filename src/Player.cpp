@@ -44,6 +44,31 @@ void Player::Update()
 
     Vector2D tryPos = m_position + direction;
 
+    // Check for chest
+    if (room->GetLocation(tryPos) == 'C')
+    {
+        if (m_keyCount >0){
+            
+            if (rand() % 2 == 0)
+            {
+                health += 2;
+                printf("You found some healing potions: +2 health\n");
+            }
+            else{
+                m_goldCount +=5;
+                printf("You found some gold: +5 gold\n");
+            }
+
+            m_keyCount--;
+            room->ClearLocation(tryPos);
+        }
+        else
+        {
+            printf("NO KEY!!!\n");
+        }
+
+    }
+
        // Check for monster encounter
        if (room->GetLocation(tryPos) == 'B' || room->GetLocation(tryPos) == 'W')
        {
@@ -85,4 +110,11 @@ void Player::Update()
         m_position = tryPos;
     
     printf("%c\n", directionInput);
+}
+
+void Player::PrintStats()
+{
+    printf("Health: %d\n", health);
+    printf("Keys: %d\n", m_keyCount);
+    printf("Gold: %d\n", m_goldCount);
 }
