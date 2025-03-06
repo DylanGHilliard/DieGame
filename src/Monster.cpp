@@ -24,7 +24,7 @@ void Wolf::Start()
 {
    
     m_character = 'W';
-    m_stats.strength = 2 * room->roomCount;
-    m_stats.constitution = 2 * room->roomCount;
+    //m_stats.strength = 2 * room->roomCount;
+    //m_stats.constitution = 2 * room->roomCount;
     health = m_stats.constitution;
 }

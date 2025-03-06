@@ -1,13 +1,15 @@
 #include "Room.hpp"
 #include "Monster.hpp"
 #include "Player.hpp"
-
+#include <iostream>
 #include <fstream>
 #include <string>
+#include "Dice.hpp"
+
 
 void Room::Load(std::string _path)
 {
-    m_roomCount ++;
+    roomCount ++;
     m_map.clear();
     m_doors.clear();
 
@@ -241,8 +243,10 @@ void Room::Fight(Vector2D tryPos)
 {
     Player& player = *(Player*)m_player;
     Monster* monster = nullptr;
+    int monsterIndex = 0;
     for (Entity* _monster : m_monsters)
     {
+        monsterIndex++;
         if (_monster->GetPosition() == tryPos)
         {
             monster = (Monster*)_monster;
@@ -256,21 +260,65 @@ void Room::Fight(Vector2D tryPos)
         return;
     }
 
+    
     printf("Good luck......mortal\n");
     while (player.health > 0 && monster->health > 0)
     {
 
+        int choice;
 
-        // player attack monster
-        int playerDamage = player.GetStats().strength;
-        monster->health -= playerDamage;
-        printf("You hit the monster for %d damage, keep going.\n", playerDamage);
+    printf("Choose an action:\n");
+    printf("1. SMASH attack\n");
+    printf("2. KAHMEKAHMEHAAAAAAA\n");
+    printf("3. 28 stab wounds\n");
+    std::cin >> choice;
+    int attackdamage;
+    Die dice;
+    RollStats stats;
+    
+    switch (choice)
+    {
+    case 1:
+       dice = {player.GetStats().strength};
+      stats = RollDice({dice}); 
+         attackdamage = stats.total;
+        monster->health -= attackdamage;
+        printf("You hit the monster for %d damage, keep going.\n", attackdamage);
+        
+        break;
+    case 2:
+       dice = {player.GetStats().intelligence};
+       stats = RollDice({dice}); 
+        attackdamage = stats.total;
+        monster->health -= attackdamage;
+        printf("You hit the monster for %d damage, keep going.\n", attackdamage);
+        
+        break;
+        
+    case 3:
+       dice = {player.GetStats().dexterity};
+       stats = RollDice({dice}); 
+       attackdamage = stats.total;
+        monster->health -= attackdamage;
+        printf("You hit the monster for %d damage, keep going.\n", attackdamage);
+        
+        break;
+    default:
+        printf("You stand there like a fool\n");
+        break;
+    }
+
+        
 
         //monster dead
         if (monster->health <= 0)
         {
            printf("Monster is dead, good job\n");
            ClearLocation(tryPos);
+           Entity* _monster = m_monsters[monsterIndex] ;
+           delete _monster;
+           //_monster = nullptr;
+
            return;
         }
 

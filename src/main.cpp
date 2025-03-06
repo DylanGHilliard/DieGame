@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "Dice.hpp"
 #include "Entity.hpp"
 #include "Room.hpp"
 
