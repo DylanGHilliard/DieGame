@@ -7,6 +7,7 @@
 
 void Room::Load(std::string _path)
 {
+    m_roomCount ++;
     m_map.clear();
     m_doors.clear();
 
@@ -106,6 +107,7 @@ void Room::Load(std::string _path)
                 monster->Init(Vector2D(x, y));
                 m_monsters.push_back(monster);
                 monster->Start();
+
 
                 // clear
                // m_map[y][x] = ' ';
@@ -281,10 +283,17 @@ void Room::Fight(Vector2D tryPos)
         if (player.health <= 0)
         {
             printf("Shame you died\n");
-            //game over logic here
+            GameOver();
             return;
         }
         
     }
 }
+void Room::GameOver(){
+    Player& player = *(Player*)m_player;
+    printf("Game Over\n");
+    player.PrintStats();
+    exit(0);
+    }
+
     

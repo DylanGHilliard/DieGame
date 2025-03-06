@@ -24,4 +24,5 @@ class Wolf : public Monster{
         void Start();
         //void Update();
     private:
+    
     };

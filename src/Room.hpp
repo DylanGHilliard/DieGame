@@ -13,6 +13,7 @@ public:
     void Draw();
     void Update();
     void Fight(Vector2D tryPos);
+    void GameOver();
 
     bool StillPlaying() { return true; }
 
@@ -23,6 +24,7 @@ public:
     void SetLocation(Vector2D _pos, char _char);
     void ClearLocation(Vector2D _pos);
     void OpenDoor(Vector2D _pos);
+    int roomCount = 0;
 private:
     Entity *m_player = nullptr;
     std::vector<Entity*> m_monsters;
