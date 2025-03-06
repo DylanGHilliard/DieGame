@@ -220,21 +220,51 @@ void Room::OpenDoor(Vector2D _pos)
 void Room::Fight(Vector2D tryPos)
 {
     Player& player = *(Player*)m_player;
-    Monster* monster;
+    Monster* monster = nullptr;
     for (Entity* _monster : m_monsters)
     {
         if (_monster->GetPosition() == tryPos)
         {
-            //monster = *(Monster*)_monster;
-            return;
+            monster = (Monster*)_monster;
+            break;
         }
     }
 
-    while (player.health > 0 && monster->health > 0)
+    if (!monster)
     {
+        printf("No monster here, but danger still awaits\n");
         return;
     }
 
+    printf("Good luck......mortal\n");
+    while (player.health > 0 && monster->health > 0)
+    {
+        // player attack monster
+        int playerDamage = player.GetStats().strength;
+        monster->health -= playerDamage;
+        printf("You hit the monster for %d damage, keep going.\n", playerDamage);
 
+        //monster dead
+        if (monster->health <= 0)
+        {
+           printf("Monster is dead, good job\n");
+           ClearLocation(tryPos);
+           return;
+        }
+
+         //monster attack player
+         int monsterDamage = monster->GetStats().strength;
+         player.health -= monsterDamage;
+         printf("The monster strikes you for %d damage!\n", monsterDamage);
+         
+        //player dead
+        if (player.health <= 0)
+        {
+            printf("Shame you died\n");
+            //game over logic here
+            return;
+        }
+        
+    }
 }
     
