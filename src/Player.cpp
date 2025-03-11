@@ -4,6 +4,7 @@
 #include "Room.hpp"
 #include <time.h>
 
+
 void Player::Start()
 {
     m_character = 'P';
@@ -19,6 +20,14 @@ void Player::Start()
 void Player::Update()
 {
     char directionInput;
+
+    if (m_isStart)
+    {
+        m_isStart = false;
+        printf("Welcome to the dungeon!\n");
+        UpdateStats();
+        
+    }
     
     do {
         directionInput = request_char("wasd and Enter to move");
@@ -125,4 +134,49 @@ void Player::PrintStats()
     printf("Health: %d\n", health);
     printf("Keys: %d\n", m_keyCount);
     printf("Gold: %d\n", m_goldCount);
+}
+
+void Player::UpdateStats()
+{
+    while (m_statPoints>0)
+    {
+        printf("You have %d stat points to spend\n", m_statPoints);
+        printf("Where would you like to put your points?\n");
+        printf("1. Strength %d\n 2. Constitution %d\n 3. Dexterity %d\n 4. Intelligence %d\n 5. Wisdom %d \n 6. Charisma %d \n",m_stats.strength, m_stats.constitution, m_stats.dexterity, m_stats.intelligence, m_stats.wisdom, m_stats.charisma);
+        int statChoice = request_int("Enter Stat Number to Increase");
+        int statPoints = request_int("Enter the number of points to put into the stat");
+        while (statPoints > m_statPoints)
+        {
+            printf("You don't have that many points to spend\n");
+            statPoints = request_int("Enter the number of points to put into the stat");
+        }
+
+        switch (statChoice)
+        {
+        case 1:
+            m_stats.strength+=statPoints;
+            break;
+        case 2:
+            m_stats.constitution+=statPoints;
+            break;
+        case 3:
+            m_stats.dexterity+=statPoints;
+            break;
+        case 4:
+            m_stats.intelligence+=statPoints;
+            break;
+        case 5:
+            m_stats.wisdom+=statPoints;
+            break;
+        case 6:
+            m_stats.charisma+=statPoints;
+            
+            break;
+        default:
+            break;
+        }
+        m_statPoints -= statPoints;
+    }
+
+
 }
