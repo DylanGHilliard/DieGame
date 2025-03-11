@@ -111,6 +111,7 @@ void Player::Update()
         {
             health += 5;
         }
+        return;
     }
 
     if (room->GetLocation(tryPos) == ' ') 
