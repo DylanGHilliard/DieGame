@@ -249,7 +249,7 @@ void Room::Fight(Vector2D tryPos)
         
         if (_monster->GetPosition() == tryPos)
         {
-            monster = (Monster*)_monster;
+            monster = dynamic_cast<Monster*>(_monster);
             break;
         }
         monsterIndex++;
@@ -259,6 +259,19 @@ void Room::Fight(Vector2D tryPos)
     {
         printf("No monster here, but danger still awaits\n");
         return;
+    }
+
+    if (Bear* bear = dynamic_cast<Bear*>(monster))
+    {
+        printf("You encountered a Bear!\n");
+    }
+    else if (Wolf* wolf = dynamic_cast<Wolf*>(monster))
+    {
+        printf("You encountered a Wolf!\n");
+    }
+    else
+    {
+        printf("You encountered a Monster!\n");
     }
 
     
@@ -309,7 +322,7 @@ void Room::Fight(Vector2D tryPos)
         break;
     }
 
-        
+        monster->Attack(player);
 
         //monster dead
         if (monster->health <= 0)
@@ -321,11 +334,14 @@ void Room::Fight(Vector2D tryPos)
 
            return;
         }
-
-         //monster attack player
+        
+        if(m_player->GetPosition() == monster->GetPosition() || monster->GetPosition() == 'B')
+        {
          int monsterDamage = monster->GetStats().strength;
          player.health -= monsterDamage;
          printf("The monster strikes you for %d damage!\n", monsterDamage);
+            return;
+        }
          
         //player dead
         if (player.health <= 0)
