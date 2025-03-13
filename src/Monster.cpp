@@ -1,6 +1,8 @@
 #include "Monster.hpp"
 #include "Player.hpp"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>  
 
 void Monster::Start()
 {
@@ -14,7 +16,8 @@ void Monster::Update()
 
 void Monster::Attack(Player& player)
 {
-    int damage = GetStats().strength;
+    float dmgmulti = (rand() % 101 + 50) / 100.0f;
+    int damage = static_cast<int>(m_stats.strength * dmgmulti);     
     player.health -= damage;
     printf("The monster attacks you for %d damage!\n", damage);
 }
@@ -28,20 +31,24 @@ void Bear::Start()
 
 void Bear::Attack(Player& player)
 {
-    int damage = m_stats.strength;
+    float dmgmulti = (rand() % 101 + 50) / 100.0f;
+    int damage = static_cast<int>(m_stats.strength * dmgmulti);     
     player.health -= damage;
-    printf("The bear mauls you for %d damage!\n", damage);
+    printf("The Bear attacks you for %d damage!\n", damage);
 }
 
 void Wolf::Start()
 {
+    health = 10;
     m_character = 'W';
-    health = m_stats.constitution;
+    m_stats.dexterity = 5;
+    
 }
 
 void Wolf::Attack(Player& player)
 {
-    int damage = m_stats.dexterity;
+    float dmgmulti = (rand() % 101 + 50) / 100.0f;
+    int damage = static_cast<int>(m_stats.dexterity * dmgmulti);     
     player.health -= damage;
     printf("The wolf lunges at you and deals %d damage!\n", damage);
 }
