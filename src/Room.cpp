@@ -279,13 +279,14 @@ void Room::Fight(Vector2D tryPos)
     while (player.health > 0 && monster->health > 0)
     {
 
-        int choice;
 
     printf("Choose an action:\n");
     printf("1. SMASH attack\n");
     printf("2. KAHMEKAHMEHAAAAAAA\n");
     printf("3. 28 stab wounds\n");
-    std::cin >> choice;
+    //std::cin >> choice;
+    
+        int choice = get_int();
     int attackdamage;
     Die dice;
     RollStats stats;
@@ -322,7 +323,6 @@ void Room::Fight(Vector2D tryPos)
         break;
     }
 
-        monster->Attack(player);
 
         //monster dead
         if (monster->health <= 0)
@@ -331,10 +331,16 @@ void Room::Fight(Vector2D tryPos)
            ClearLocation(tryPos);
            delete m_monsters[monsterIndex];
            m_monsters.erase(m_monsters.begin() + monsterIndex);
+           int points = rand() %3;
+           printf("You have gained %d Points\n", points);
+           player.AddPoints(points);
 
            return;
         }
         
+        monster->Attack(player);
+
+       //what does this do?? - dylan 
         if(m_player->GetPosition() == monster->GetPosition() || monster->GetPosition() == 'B')
         {
          int monsterDamage = monster->GetStats().strength;
