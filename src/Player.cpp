@@ -9,12 +9,15 @@
 void Player::Start()
 {
     m_character = 'P';
-    m_stats.strength = 10;
-    m_stats.constitution = 10;
-    m_stats.dexterity = 10;
-    m_stats.intelligence = 10;
-    m_stats.wisdom = 10;
-    m_stats.charisma = 10;
+    if (m_stats.strength == 0)
+    {
+        m_stats.strength = 10;
+        m_stats.constitution = 10;
+        m_stats.dexterity = 10;
+        m_stats.intelligence = 10;
+        m_stats.wisdom = 10;
+        m_stats.charisma = 10;
+    }
     health = m_stats.constitution *2;
 }
 

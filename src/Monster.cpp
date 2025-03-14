@@ -1,10 +1,10 @@
 #include "Monster.hpp"
 #include "Player.hpp"
+#include "Room.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>  
 #include <cmath>
-#include "Room.hpp"
 
 
 void Monster::Start()
@@ -27,9 +27,10 @@ void Monster::Attack(Player& player)
 
 void Bear::Start()
 {
+
     health = 15;
     m_character = 'B';
-    m_stats.strength = 5;
+    m_stats.strength = 5 *  round(m_scale*0.5); 
 }
 
 void Bear::Attack(Player& player)
@@ -44,7 +45,7 @@ void Wolf::Start()
 {
     health = 10;
     m_character = 'W';
-    m_stats.dexterity = 5;
+    m_stats.dexterity = 5 * round(m_scale*0.5);
     
 }
 
