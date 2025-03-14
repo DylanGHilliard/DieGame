@@ -3,6 +3,7 @@
 
 #include "Room.hpp"
 #include <time.h>
+#include <string.h>
 
 
 void Player::Start()
@@ -19,7 +20,11 @@ void Player::Start()
 
 void Player::Update()
 {
-    char directionInput;
+    if(m_statPoints > 0)
+    {
+        UpdateStats();
+    }
+    char* directionInput;
 
     if (m_isStart)
     {
@@ -30,32 +35,36 @@ void Player::Update()
     }
     
     do {
-        directionInput = request_char("wasd and Enter to move");
-    } while (directionInput != 'w' &&
-             directionInput != 'a' &&
-             directionInput != 's' &&
-             directionInput != 'd');
-    
+        directionInput = request_string("wasd and Enter to move");
+    } while (strcmp(directionInput, "w") != 0 &&
+            strcmp(directionInput, "a") != 0 &&
+            strcmp(directionInput, "s") != 0 &&
+            strcmp(directionInput, "d") != 0 &&
+            strcmp(directionInput, "dw") != 0 &&
+            strcmp(directionInput, "da") != 0 &&
+            strcmp(directionInput, "ds") != 0 &&
+            strcmp(directionInput, "dd") != 0 
+
+        );
+
     Vector2D direction(0.0f);
 
-    switch (directionInput)
-    {
-    case 'w':
+    if(strcmp(directionInput, "w") == 0)
         direction = {0.0f, -1.0f};
-        break;
-    case 'a':
+    if(strcmp(directionInput, "a") == 0)
         direction = {-1.0f, 0.0f};
-        break;
-    case 's':
+    if(strcmp(directionInput, "s") == 0)
         direction = {0.0f, 1.0f};
-        break;
-    case 'd':
+    if(strcmp(directionInput, "d") == 0)
         direction = {1.0f, 0.0f};
-        break;
-    default:
-        direction = {0.0f, 1.0f};
-        break;
-    }
+    if(strcmp(directionInput, "dw") == 0)
+        Dash({0.0f, -1.0f});
+    if(strcmp(directionInput, "da") == 0)
+        Dash({-1.0f, 0.0f});
+    if(strcmp(directionInput, "ds") == 0)
+        Dash({0.0f, 1.0f});
+    if(strcmp(directionInput, "dd") == 0)
+        Dash({1.0f, 0.0f});
 
     Vector2D tryPos = m_position + direction;
 
@@ -127,6 +136,18 @@ void Player::Update()
         m_position = tryPos;
     
     printf("%c\n", directionInput);
+}
+
+void Player::Dash(Vector2D _dir){
+    while(true){
+        Vector2D tryPos = m_position + _dir;
+        if (room->GetLocation(tryPos) == ' '){
+            m_position = tryPos;
+        }
+        else{
+            break;
+        }
+    }
 }
 
 void Player::PrintStats()

@@ -10,6 +10,7 @@ public:
     void Update();
     void PrintStats();
     void UpdateStats();
+    void Dash(Vector2D _dir);
 private:
     int m_keyCount = 0;
     int m_goldCount = 0;
